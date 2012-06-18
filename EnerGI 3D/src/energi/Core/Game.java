@@ -11,6 +11,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import static org.lwjgl.opengl.GL11.*;
+import energi.Audio.AudioThread;
 
 /**
  * Represents the game instance
@@ -20,6 +21,7 @@ public abstract class Game extends DrawableGameObject
 {
     Vector <GameObject> gameObjects;
     boolean redisplay = true;
+    AudioThread aThread;
     /**
      * Initialize the game and all registered game objects
      * @throws EnergiException 
@@ -42,10 +44,13 @@ public abstract class Game extends DrawableGameObject
             g.Initialize();
         
         GLInit();
+        aThread = new AudioThread();
+        aThread.start();
     }
     
     private void GLInit()
     {
+        // create the viewports
         glOrtho(-300.0f, 300.0f, -300.0f, 300.0f, 300.0f, -300.0f);
     }
     

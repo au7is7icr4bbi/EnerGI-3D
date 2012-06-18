@@ -9,11 +9,14 @@ import java.util.LinkedList;
  * Stores a queue of audio items for sequential playback
  * @author Andrew
  */
-public class AudioPlayer {
+public class AudioPlayer
+{
     static LinkedList<AudioItem> audio;
     static int pos;
     
     private AudioPlayer() {
+        audio = new LinkedList<>();
+        pos = 0;
     }
     
     public static AudioPlayer getInstance() {

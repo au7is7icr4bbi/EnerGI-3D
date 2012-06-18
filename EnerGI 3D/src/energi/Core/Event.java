@@ -5,7 +5,7 @@
 package energi.Core;
 
 /**
- *
+ * Abstract base class for all events
  * @author Andrew
  */
 public abstract class Event
