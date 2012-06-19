@@ -14,11 +14,18 @@ public class AudioPlayer
     static LinkedList<AudioItem> audio;
     static int pos;
     
+    /**
+     * Initialise the audio player
+     */
     private AudioPlayer() {
         audio = new LinkedList<>();
         pos = 0;
     }
     
+    /**
+     * Get the singleton instance
+     * @return 
+     */
     public static AudioPlayer getInstance() {
         return AudioPlayerHolder.INSTANCE;
     }

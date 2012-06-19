@@ -17,6 +17,12 @@ public class Texture2D
 {
     Texture texture;
     
+    /**
+     * Create a new 2d texture object
+     * @param filename The texture file
+     * @param type The file type
+     * @throws EnergiException 
+     */
     public Texture2D(String filename, String type) throws EnergiException
     {
         try
@@ -29,6 +35,9 @@ public class Texture2D
         }
     }
     
+    /**
+     * Draw the texture
+     */
     public void Draw()
     {
         texture.bind();
@@ -36,6 +45,9 @@ public class Texture2D
         // draw the shape, using the texture coordinates, here
     }
     
+    /**
+     * Release the texture when done
+     */
     public void destroy()
     {
         texture.release();

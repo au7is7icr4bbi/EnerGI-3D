@@ -10,11 +10,22 @@ package energi.Core;
  */
 public abstract class DrawableGameObject implements GameObject
 {
+    /**
+     * Initialize the game object
+     * @throws EnergiException 
+     */
     @Override
     public abstract void Initialize() throws EnergiException;
     
+    /**
+     * Update the game object
+     */
     @Override
     public abstract void Update();
     
+    /**
+     * Draw the game object
+     * @throws EnergiException 
+     */
     public abstract void Draw() throws EnergiException;
 }

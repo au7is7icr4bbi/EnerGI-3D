@@ -14,10 +14,10 @@ import static org.lwjgl.opengl.GL11.*;
 import energi.Audio.AudioThread;
 
 /**
- * Represents the game instance
+ * Represents the game instance. This class must be subclassed
  * @author Andrew
  */
-public abstract class Game extends DrawableGameObject
+public abstract class Game extends DrawableGameObject implements Runnable
 {
     Vector <GameObject> gameObjects;
     boolean redisplay = true;
@@ -48,12 +48,18 @@ public abstract class Game extends DrawableGameObject
         aThread.start();
     }
     
+    /**
+     * Initialise OpenGL
+     */
     private void GLInit()
     {
         // create the viewports
         glOrtho(-300.0f, 300.0f, -300.0f, 300.0f, 300.0f, -300.0f);
     }
     
+    /**
+     * Update all registered game objects
+     */
     @Override
     public void Update()
     {
@@ -61,6 +67,10 @@ public abstract class Game extends DrawableGameObject
             g.Update();
     }
     
+    /**
+     * Draw all drawable game objects
+     * @throws EnergiException 
+     */
     @Override
     public void Draw() throws EnergiException
     {
@@ -75,6 +85,7 @@ public abstract class Game extends DrawableGameObject
     /**
      * Run the game loop until the display is closed
      */
+    @Override
     public final void run()
     {
         try
@@ -109,6 +120,10 @@ public abstract class Game extends DrawableGameObject
         AL.destroy();
     }
     
+    /**
+     * Exits the game gracefully (with or without errors), freeing all resources
+     * @param retVal Program return value
+     */
     private void exit(int retVal)
     {
         Display.destroy();

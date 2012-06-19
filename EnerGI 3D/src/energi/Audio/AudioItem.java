@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.newdawn.slick.openal.Audio;
 
 /**
- *
+ * Represents an audio item loaded from a system resource
  * @author Andrew
  */
 public class AudioItem
@@ -18,6 +18,13 @@ public class AudioItem
     Audio audio;
     boolean looping;
     
+    /**
+     * Create a new audio item from a system resource
+     * @param filename The audio file name
+     * @param type The file type
+     * @param loop Boolean indicating if the sound will loop
+     * @throws EnergiException 
+     */
     public AudioItem(String filename, String type, boolean loop) throws EnergiException
     {
         try
@@ -31,11 +38,17 @@ public class AudioItem
         looping = loop;
     }
     
+    /**
+     * Play the audio
+     */
     public void play()
     {
         audio.playAsMusic(0, 0, looping);
     }
     
+    /**
+     * Pause the audio
+     */
     public void pause()
     {
         audio.stop();

@@ -5,7 +5,7 @@
 package energi.Physics;
 
 /**
- *
+ * Represents a bounding sphere that cannot be textured
  * @author Andrew
  */
 public class BoundingSphere {

@@ -8,7 +8,16 @@ package energi.Core;
  * Abstract representation of a standard game object
  * @author Andrew
  */
-public interface GameObject {
+public interface GameObject
+{
+    /**
+     * Initialize the game object
+     * @throws EnergiException 
+     */
     public void Initialize() throws EnergiException;
+    /**
+     * Update the game object
+     * @todo Add time deltas
+     */
     public void Update();
 }

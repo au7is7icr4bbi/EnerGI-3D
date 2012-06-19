@@ -5,7 +5,7 @@
 package energi.Physics;
 
 /**
- *
+ * Represents a bounding box that can be textured
  * @author Andrew
  */
 public class BoundingBox {

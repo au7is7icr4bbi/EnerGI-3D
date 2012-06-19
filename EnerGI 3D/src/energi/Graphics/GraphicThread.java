@@ -10,6 +10,9 @@ package energi.Graphics;
  */
 public class GraphicThread extends Thread
 {
+    /**
+     * Execute the rendering thread
+     */
     @Override
     public void run()
     {

@@ -10,11 +10,12 @@ package energi.Core;
  */
 public abstract class Event
 {
+    /**
+     * Event handler
+     */
     protected EventHandler handler;
+    /**
+     * Indicates if the event has been triggered
+     */
     protected boolean triggered;
-    protected void handleEvent()
-    {
-        if (triggered)
-            handler.handleEvent();
-    }
 }
