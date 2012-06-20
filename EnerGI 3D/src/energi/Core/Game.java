@@ -11,17 +11,16 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import static org.lwjgl.opengl.GL11.*;
-import energi.Audio.AudioThread;
+import energi.Audio.AudioPlayer;
 
 /**
- * Represents the game instance. This class must be subclassed
+ * Represents the game instance. This class must be subclassed to create a game
  * @author Andrew
  */
 public abstract class Game extends DrawableGameObject implements Runnable
 {
     Vector <GameObject> gameObjects;
     boolean redisplay = true;
-    AudioThread aThread;
     /**
      * Initialize the game and all registered game objects
      * @throws EnergiException 
@@ -44,8 +43,7 @@ public abstract class Game extends DrawableGameObject implements Runnable
             g.Initialize();
         
         GLInit();
-        aThread = new AudioThread();
-        aThread.start();
+        AudioPlayer.Initialize();
     }
     
     /**

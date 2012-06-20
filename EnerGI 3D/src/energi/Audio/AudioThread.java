@@ -58,9 +58,10 @@ public class AudioThread extends Thread
     {
         try
         {
-            // start playing audio, and flag the event as begun
+            // start playing audio, and send a begin and playing event
             AudioPlayer.play();
             startEvents();
+            
             // loop for audio events
             while (!terminate)
             {
@@ -129,6 +130,23 @@ public class AudioThread extends Thread
             case AudioStopped:
                 handlers[2] = e;
                 break;
+        }
+    }
+    
+    /**
+     * Send an event to the thread from the audio player.
+     * @param type The event type
+     * @throws EnergiException 
+     */
+    public void sendEvent(EventType type) throws EnergiException
+    {
+        try
+        {
+            eventQueue.put(new AudioEvent(type, handlers[type.ordinal()]));
+        }
+        catch (InterruptedException e)
+        {
+            throw new EnergiException(e);
         }
     }
 }

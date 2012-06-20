@@ -8,6 +8,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import energi.Core.EnergiException;
 import java.io.IOException;
 import org.newdawn.slick.openal.Audio;
+import energi.Core.Asset;
 
 /**
  * Represents an audio item loaded from a system resource
@@ -19,7 +20,7 @@ public class AudioItem
     boolean looping;
     
     /**
-     * Create a new audio item from a system resource
+     * Create a new audio item from a system resource. Called by
      * @param filename The audio file name
      * @param type The file type
      * @param loop Boolean indicating if the sound will loop
