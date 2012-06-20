@@ -10,7 +10,7 @@ import energi.Core.EnergiException;
  * Stores a queue of audio items for sequential playback
  * @author Andrew
  */
-public class AudioPlayer
+public final class AudioPlayer
 {
     static LinkedList<AudioItem> audio;
     static int pos;

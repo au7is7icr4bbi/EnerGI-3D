@@ -12,7 +12,7 @@ import energi.Core.Event;
  * Audio playback thread. Manages the audio event loop
  * @author Andrew
  */
-public class AudioThread extends Thread
+public final class AudioThread extends Thread
 {
     /**
      * Represents the types of events created in this thread
