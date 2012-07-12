@@ -116,9 +116,8 @@ public class InputDevice
     
     /**
      * Scan for new events
-     * @todo Implement the event loop
      */
-    public static void scanEvents() throws EnergiException
+    static void scanEvents() throws EnergiException
     {
         for (int i = 0; i < events.size(); i++)
         {

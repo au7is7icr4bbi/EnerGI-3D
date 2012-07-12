@@ -18,7 +18,7 @@ public class Kinematic implements GameObject
      */
     public Vector3 staticHorizontalMotion()
     {
-        Vector3 endPos = new Vector3();
+        Vector3 endPos = new Vector3(true);
         return endPos;
     }
     
@@ -28,7 +28,7 @@ public class Kinematic implements GameObject
      */
     public Vector3 staticVerticalMotion()
     {
-        Vector3 endPos = new Vector3();
+        Vector3 endPos = new Vector3(true);
         return endPos;
     }
     
@@ -38,7 +38,7 @@ public class Kinematic implements GameObject
      */
     public Vector3 dynamicVerticalMotion()
     {
-        Vector3 endPos = new Vector3();
+        Vector3 endPos = new Vector3(true);
         return endPos;
     }
     

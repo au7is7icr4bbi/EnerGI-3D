@@ -17,7 +17,6 @@ public interface GameObject
     public void Initialize() throws EnergiException;
     /**
      * Update the game object
-     * @todo Add time deltas
      */
     public void Update();
 }
