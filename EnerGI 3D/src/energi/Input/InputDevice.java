@@ -93,6 +93,7 @@ public class InputDevice
         KEYDOWN,
     }
     static Vector <Event> events;
+    private static InputThread thread;
     /**
      * Initialize the input event loop
      * @throws EnergiException 
@@ -103,6 +104,8 @@ public class InputDevice
         {
             Keyboard.create();
             Mouse.create();
+            thread = new InputThread();
+            thread.start();
         }
         catch (LWJGLException e)
         {
@@ -115,19 +118,55 @@ public class InputDevice
      * Scan for new events
      * @todo Implement the event loop
      */
-    public static void scanEvents()
+    public static void scanEvents() throws EnergiException
     {
+        for (int i = 0; i < events.size(); i++)
+        {
+            try
+            {
+                // check if the event is an instance of a keyboard event or a mouse event
+                if (events.get(i) instanceof KeyboardEvent)
+                {
+                    KeyboardEvent event = (KeyboardEvent)events.get(i);
+                    if (Keyboard.isKeyDown(event.getEventKey()) == event.getAction())
+                    {
+                        thread.events.put(event);
+                    }
+                }
+                else if (events.get(i) instanceof MouseEvent)
+                {
+                    MouseEvent event = (MouseEvent)events.get(i);
+                    if (event.bEvent != null && Mouse.isButtonDown(event.bEvent.ordinal()))
+                    {
+                        thread.events.put(event);
+                    }
+                    else if (event.aEvent != null)
+                    {
+                        if (Mouse.getDX() != 0 && event.aEvent == AxisEvent.DeltaX)
+                            thread.events.put(event);
+                        else if (Mouse.getDY() != 0 && event.aEvent == AxisEvent.DeltaY)
+                            thread.events.put(event);
+                        else if (Mouse.getDWheel() != 0 && event.aEvent == AxisEvent.Wheel)
+                            thread.events.put(event);
+                    }
+                }
+            }
+            catch (InterruptedException e)
+            {
+                throw new EnergiException(e);
+            }
+        }
     }
     
     /**
      * Register a new keyboard event
      * @param handler The event handler
      * @param key The event key
-     * @param a The event action (keyup or keydown)
+     * @param isDown The event action (keyup (false) or keydown (true))
      */
-    public static void registerEvent(EventHandler handler, int key, KeyboardAction a)
+    public static void registerEvent(EventHandler handler, int key, boolean isDown)
     {
-        events.add(new KeyboardEvent(handler, key, a));
+        events.add(new KeyboardEvent(handler, key, isDown));
     }
     
     /**
@@ -192,6 +231,7 @@ class MouseEvent extends Event
     /**
      * Trigger the event handler
      */
+    @Override
     public void triggerEvent()
     {
         handler.handleEvent();
@@ -205,7 +245,7 @@ class MouseEvent extends Event
 class KeyboardEvent extends Event
 {
     int key;
-    InputDevice.KeyboardAction action;
+    boolean isPressed = true;
     
     /**
      * Create a new KeyboardEvent instance. Generated internally
@@ -213,11 +253,11 @@ class KeyboardEvent extends Event
      * @param key The event key
      * @param action The action taken (keyup or keydown)
      */
-    public KeyboardEvent(EventHandler handler, int key, InputDevice.KeyboardAction action)
+    public KeyboardEvent(EventHandler handler, int key, boolean down)
     {
         this.handler = handler;
         this.key = key;
-        this.action = action;
+        this.isPressed = down;
     }
     
     /**
@@ -233,14 +273,15 @@ class KeyboardEvent extends Event
      * Get the event action
      * @return The event action
      */
-    public InputDevice.KeyboardAction getAction()
+    public boolean getAction()
     {
-        return action;
+        return isPressed;
     }
     
     /**
      * Trigger the event handler
      */
+    @Override
     public void triggerEvent()
     {
         handler.handleEvent();

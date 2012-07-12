@@ -28,6 +28,7 @@ public class Texture2D
         try
         {
             texture = TextureLoader.getTexture(type, ResourceLoader.getResourceAsStream(filename));
+            GraphicThread.textures.add(this);
         }
         catch (IOException e)
         {

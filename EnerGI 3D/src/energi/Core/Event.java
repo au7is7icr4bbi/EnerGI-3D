@@ -18,4 +18,6 @@ public abstract class Event
      * Indicates if the event has been triggered
      */
     protected boolean triggered;
+    
+    public abstract void triggerEvent();
 }
